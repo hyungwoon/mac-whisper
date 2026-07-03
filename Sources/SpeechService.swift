@@ -446,7 +446,7 @@ final class SpeechService {
         }
         let rms = sqrt(sum / Float(frames))
         // Map RMS to a perceptual 0...1 range; speech RMS is typically small.
-        return min(1.0, max(0.0, rms * 12.0))
+        return min(1.0, max(0.0, rms * 60.0))
     }
 
     /// Append a line to a diagnostics file so speech/VAD behavior can be inspected
