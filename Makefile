@@ -65,9 +65,9 @@ run: app
 
 ## Install into /Applications
 install: app
-	@echo "==> Installing to $(INSTALL_DIR)/$(APP_BUNDLE)"
-	@rm -rf "$(INSTALL_DIR)/$(APP_BUNDLE)"
-	@cp -R "$(APP_BUNDLE)" "$(INSTALL_DIR)/$(APP_BUNDLE)"
+	@echo "==> Installing to $(INSTALL_DIR)/$(APP_NAME).app"
+	@rm -rf "$(INSTALL_DIR)/$(APP_NAME).app"
+	@cp -R "$(APP_BUNDLE)" "$(INSTALL_DIR)/$(APP_NAME).app"
 	@echo "==> Installed. Launch from /Applications or Spotlight."
 
 ## Remove build artifacts

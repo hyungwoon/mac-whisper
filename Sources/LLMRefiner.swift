@@ -312,7 +312,7 @@ enum LLMRefiner {
                   let content = message["content"] as? String else {
                 return nil
             }
-            return content
+            return stripThinking(content)
         } completion: { completion($0) }
     }
 
@@ -397,6 +397,20 @@ enum LLMRefiner {
             completion(.success(cleaned.isEmpty ? original : cleaned))
         }
         task.resume()
+    }
+
+    /// Some open models (e.g. Gemma 4's `-it` variants) can't disable inline
+    /// reasoning via the API and emit it as `<thought>...</thought>` inside the
+    /// visible `content` field instead of a separate field. Strip it so it never
+    /// leaks into the injected/corrected text.
+    private static func stripThinking(_ content: String) -> String {
+        guard let range = content.range(of: "<thought>"),
+              let closeRange = content.range(of: "</thought>", range: range.upperBound..<content.endIndex) else {
+            return content
+        }
+        var result = content
+        result.removeSubrange(range.lowerBound..<closeRange.upperBound)
+        return result.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     /// Build the endpoint URL, tolerating base URLs with or without the full path.

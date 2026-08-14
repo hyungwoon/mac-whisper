@@ -61,8 +61,8 @@ struct LLMProvider {
         LLMProvider(
             id: "google", displayName: "Google (Gemini)",
             baseURL: "https://generativelanguage.googleapis.com/v1beta/openai", proto: .openai,
-            models: ["gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-3.1-pro-preview"],
-            defaultModel: "gemini-3.5-flash",
+            models: ["gemma-4-31b-it", "gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-3.1-pro-preview"],
+            defaultModel: "gemma-4-31b-it",
             reasoningEfforts: ["low", "medium", "high"]
         ),
         LLMProvider(
